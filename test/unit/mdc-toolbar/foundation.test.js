@@ -169,15 +169,15 @@ const scrollEventMock =
 
     const flexibleExpansionHeight = numbers.TOOLBAR_ROW_HEIGHT * 2;
     const maxTranslateYDistance = numbers.TOOLBAR_ROW_HEIGHT;
-    const scrollTheshold = flexibleExpansionHeight + maxTranslateYDistance;
+    const scrollThreshold = flexibleExpansionHeight + maxTranslateYDistance;
 
     if (flexExpansionRatio > 0) {
       td.when(mockAdapter.getViewportScrollY()).thenReturn((1 - flexExpansionRatio) * flexibleExpansionHeight);
     } else {
       if (isOutOfTheshold) {
-        td.when(mockAdapter.getViewportScrollY()).thenReturn(scrollTheshold + 1);
+        td.when(mockAdapter.getViewportScrollY()).thenReturn(scrollThreshold + 1);
       } else {
-        td.when(mockAdapter.getViewportScrollY()).thenReturn(scrollTheshold - 1);
+        td.when(mockAdapter.getViewportScrollY()).thenReturn(scrollThreshold - 1);
       }
     }
 
@@ -513,7 +513,6 @@ test('on scroll take correct action for flexible fixed last row only header with
   td.when(mockAdapter.hasClass(cssClasses.FLEXIBLE_DEFAULT_BEHAVIOR)).thenReturn(true);
   scrollEventMock(foundation, mockAdapter, mockRaf, {flexExpansionRatio: 0});
 
-  td.verify(mockAdapter.setStyleForTitleElement('transform', td.matchers.anything()));
   td.verify(mockAdapter.setStyleForTitleElement('font-size', td.matchers.anything()));
   mockRaf.restore();
 });
@@ -527,7 +526,6 @@ test('on scroll take correct action for flexible fixed header with default behav
   td.when(mockAdapter.hasClass(cssClasses.FLEXIBLE_DEFAULT_BEHAVIOR)).thenReturn(true);
   scrollEventMock(foundation, mockAdapter, mockRaf, {flexExpansionRatio: 0});
 
-  td.verify(mockAdapter.setStyleForTitleElement('transform', td.matchers.anything()));
   td.verify(mockAdapter.setStyleForTitleElement('font-size', td.matchers.anything()));
   mockRaf.restore();
 });
